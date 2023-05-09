@@ -13,7 +13,7 @@ class NetworkApiServices extends BaseApiServices{
     dynamic responseJson;
 
     try{
-      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 20));
+      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 60));
       responseJson = returnResponse(response);
     }on SocketException{
       throw InternetException("No InterNet");

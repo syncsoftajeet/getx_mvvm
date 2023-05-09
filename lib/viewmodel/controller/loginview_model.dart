@@ -34,7 +34,7 @@ class LoginViewModel extends GetxController{
       Utils.snackBar("Success", "Login Success");
       print('res=> $value');
 
-      userPrefrences.saveUser(LoginResponseModel.fromJson(value[0])).then((value){
+      userPrefrences.saveUser("ass").then((value){
         Get.toNamed(RoutesName.home_screen);
         Utils.toastMessage("Okk");
       }).onError((error, stackTrace) {

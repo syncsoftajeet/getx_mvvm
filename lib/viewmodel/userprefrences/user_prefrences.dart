@@ -3,16 +3,17 @@ import 'package:getx_mvvm/models/login/loginrespons_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPrefrences {
-  Future<bool> saveUser(LoginResponseModel loginResponseModel) async {
+  Future<bool> saveUser(String ss) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    sp.setString("mobile", loginResponseModel.data!.mobile.toString());
+    sp.setString("mobile", ss);
     return true;
   }
 
   Future<bool> getUser() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String? mobile = sp.getString("mobile");
-    if (mobile.toString()!="") {
+    print(mobile);
+    if (mobile.toString().isNotEmpty && mobile.toString()!='null') {
       return true;
     } else {
       return false;

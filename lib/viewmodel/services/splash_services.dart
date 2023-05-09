@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:get/utils.dart';
 import 'package:get/get.dart';
 import 'package:getx_mvvm/res/routes/routes_name.dart';
@@ -13,15 +14,21 @@ class SplashServices{
 
   void isLogin(){
 
-    Utils.toastMessage(userPrefrences.getUser().toString());
+    // userPrefrences.saveUser("loginResponseModel").then((value) => {
+    //   debugPrint("working")
+    // });
+
+    // Utils.toastMessage(userPrefrences.getUser() as String);
 
     userPrefrences.getUser().then((value) => {
 
-      if(value.toString().isNotEmpty && value.toString()!=null){
+      if(value){
         Timer(const Duration(seconds: 3),()=>Get.toNamed(RoutesName.home_screen))
       }else
-        Timer(const Duration(seconds: 3),()=>Get.toNamed(RoutesName.login_screen))
-
+        {
+          Timer(const Duration(seconds: 3), () =>
+              Get.toNamed(RoutesName.login_screen))
+        }
 
     });
 

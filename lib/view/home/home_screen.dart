@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_mvvm/data/response/status.dart';
 import 'package:getx_mvvm/res/routes/routes.dart';
 import 'package:getx_mvvm/res/routes/routes_name.dart';
+import 'package:getx_mvvm/viewmodel/home/home_viewmodel.dart';
 import 'package:getx_mvvm/viewmodel/userprefrences/user_prefrences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +16,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   UserPrefrences userPrefrences = UserPrefrences();
+
+
+  final homeviewmodel = Get.put(HomeViewModel());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    homeviewmodel.getStrores();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +40,22 @@ class _HomeScreenState extends State<HomeScreen> {
           }, icon: Icon(Icons.power_settings_new))
         ],
       ),
+      body: Obx((){
+      switch(homeviewmodel.rxRequestStatus.value) {
+        case Status.LOADING:
+          return Center(child: CircularProgressIndicator());
+
+        case Status.COMPLETE:
+          return  Center(child: Text("comp"));
+
+        case Status.ERROR:
+          return Center(child: Text("error"));
+      }
+      return SizedBox();
+      }),
+
+
+
     );
   }
 }
